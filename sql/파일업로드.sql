@@ -1,0 +1,34 @@
+DROP TABLE BOARD_TBL;
+
+CREATE TABLE BOARD_TBL(
+    BNO NUMBER(10) PRIMARY KEY,
+    TITLE VARCHAR2(500) NOT NULL,
+    CONTENT VARCHAR2(4000) NOT NULL,
+    WRITER VARCHAR2(100) NOT NULL,
+    imageFileName VARCHAR2(100),
+    WRITEDATE DATE DEFAULT SYSDATE
+);
+
+drop SEQUENCE seq_bno;
+create SEQUENCE seq_bno;
+
+INSERT INTO BOARD_TBL(BNO, TITLE, CONTENT, WRITER)
+VALUES (1, '제목임1', '내용임1', '관리자1');
+INSERT INTO BOARD_TBL(BNO, TITLE, CONTENT, WRITER)
+VALUES (2, '제목임12', '내용임2', '관리자2');
+INSERT INTO BOARD_TBL(BNO, TITLE, CONTENT, WRITER)
+VALUES (3, '제목임13', '내용임3', '관리자3');
+INSERT INTO BOARD_TBL(BNO, TITLE, CONTENT, WRITER)
+VALUES (4, '제목임14', '내용임4', '관리자4');
+
+
+-- 테이블 컬럼 추가
+alter table BOARD_TBL add replyCount int;
+
+update BOARD_TBL set replyCount = (select count(bno) from reply_tbl where reply_tbl.bno = board_tbl.bno);
+
+COMMIT;
+
+SELECT * FROM BOARD_TBL;
+
+-- SELECT MAX(BNO)+1 AS baordNo FROM BOARD_TBL;

@@ -1,0 +1,19 @@
+a {
+	text-decoration: none;
+	color: black;
+}
+
+.mv_title {
+	position: relative;
+	bottom: 0;
+}
+
+.list_mid {
+	position: relative;
+	left: 50%;
+    transform: translate(-50%);
+}
+
+.list_mid ~ p {
+	text-align: center;
+}
